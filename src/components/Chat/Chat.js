@@ -7,7 +7,7 @@ import MoodIcon from '@mui/icons-material/Mood';
 import MicIcon from '@mui/icons-material/Mic';
 import './Chat.css'
 
-const Chat = () => {
+const Chat = ({messages}) => {
     return (
         <div className='chat'>
            <div className="chat-header">
@@ -30,7 +30,16 @@ const Chat = () => {
            </div>
 
            <div className="chat-body">
-               <p className='chat-message'>
+               {
+                   messages.map((message) =>(
+                    <p key={message._id} className={`chat-message ${message.received && "chat-receiver"} `}>
+                    <span className='chat-name'>{message.name}</span>
+                    {message.message}
+                    <span className='chat-time'>{message.timestamp}</span>
+                </p>
+                   ))
+               }
+               {/* <p className='chat-message'>
                    <span className='chat-name'>Habib</span>
                    This is a message
                    <span className='chat-time'>{new Date().toUTCString()}</span>
@@ -44,7 +53,7 @@ const Chat = () => {
                    <span className='chat-name'>Habib</span>
                    This is a message
                    <span className='chat-time'>{new Date().toUTCString()}</span>
-               </p>
+               </p> */}
                
            </div>
            <div className="chat-footer">

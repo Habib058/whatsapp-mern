@@ -3,12 +3,12 @@ import Chat from '../Chat/Chat';
 import Sidebar from '../Sidebar/Sidebar';
 import './Home.css'
 
-const Home = () => {
+const Home = ({messages}) => {
     return (
         <div className='home'>
             <div className='home-body'>
                 <Sidebar />
-                <Chat />
+                <Chat messages={messages}/>
             </div>
 
         </div>

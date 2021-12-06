@@ -72,3 +72,8 @@
     color: gray;
     padding: 10px;
 }
+.chat-time{
+    color: gray;
+    font-size: 10px;
+    padding-left: 10px;
+}
