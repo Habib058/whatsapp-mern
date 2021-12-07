@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar, IconButton } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
@@ -6,8 +6,22 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import MoodIcon from '@mui/icons-material/Mood';
 import MicIcon from '@mui/icons-material/Mic';
 import './Chat.css'
+import axios from '../../axios';
 
 const Chat = ({messages}) => {
+    const [input,setInput]= useState("")
+    console.log(input)
+
+    const handleClick = async (e)=>{
+        e.preventDefault();
+       await axios.post("/messages/new",{
+            message:input,
+            name:"hebib",
+            timestamp:"i am a time",
+            received:false
+        });
+        setInput("")
+    }
     return (
         <div className='chat'>
            <div className="chat-header">
@@ -39,28 +53,14 @@ const Chat = ({messages}) => {
                 </p>
                    ))
                }
-               {/* <p className='chat-message'>
-                   <span className='chat-name'>Habib</span>
-                   This is a message
-                   <span className='chat-time'>{new Date().toUTCString()}</span>
-               </p>
-               <p className='chat-receiver chat-message'>
-                   <span className='chat-name'>Habib</span>
-                   This is a message
-                   <span className='chat-time'>{new Date().toUTCString()}</span>
-               </p>
-               <p className='chat-message'>
-                   <span className='chat-name'>Habib</span>
-                   This is a message
-                   <span className='chat-time'>{new Date().toUTCString()}</span>
-               </p> */}
+               
                
            </div>
            <div className="chat-footer">
                <MoodIcon/>
                <form>
-                   <input type="text" placeholder='Type a message' />
-                   <button type='submit'>send a message</button>
+                   <input value={input} onChange={e=>setInput(e.target.value)} type="text" placeholder='Type a message' />
+                   <button onClick={handleClick} type='submit'>send a message</button>
                </form>
                 <MicIcon/>
            </div>
